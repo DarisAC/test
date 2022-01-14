@@ -8,42 +8,42 @@ async function fetchURL(){
         console.log(data);
         const type =typeof(data)
         console.log(type);
-        data.forEach(elem,index,data =>{
+        data.forEach(function (elem, index, data){
            
-        if (data[0].category!=undefined) {
+        if (elem.category!=undefined) {
             let div = document.createElement('div');
             div.className = "category";
-            div.innerHTML =data[0].category
+            div.innerHTML =elem.category
             document.body.append(div);
 
         }
-        if (data[0].title!=undefined) {
+        if (elem.title!=undefined) {
             let div = document.createElement('div');
             div.className = "title";
-            div.innerHTML =data[0].title
+            div.innerHTML =elem.title
             document.body.append(div);
 
         }
-        if (data[0].image!=undefined) {
+        if (elem.image!=undefined) {
             let div = document.createElement('div');
             div.className = "image";
-            const divURL = data[0].image;
+            const divURL = elem.image;
             div.innerHTML =`"<img src=${divURL}>"`;
         
             document.body.append(div);
 
         }
-        if (data[0].description!=undefined) {
+        if (elem.description!=undefined) {
             let div = document.createElement('div');
             div.className = "description";
-            div.innerHTML =data[0].description
+            div.innerHTML =elem.description
             document.body.append(div);
 
         }
-        if (data[0].rating!=undefined) {
+        if (elem.rating!=undefined) {
             let div = document.createElement('div');
             div.className = "rating";
-             let Ratingstr =JSON.stringify(data[0].rating)
+             let Ratingstr =JSON.stringify(elem.rating)
              var x = '{';
              var y = '}';
             var rExp = new RegExp(x, "g");
@@ -53,8 +53,9 @@ async function fetchURL(){
             document.body.append(div);
 
         }
-        }
-    } catch(error){
+        })
+    }
+    catch(error){
         console.error(error)
     }
 }
