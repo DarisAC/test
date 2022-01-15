@@ -1,14 +1,28 @@
 
 const url ="https://fakestoreapi.com/products";
+function createDivAndClass(type) {
+    let div = document.createElement('div');
+    div.className = type;
+    return div
+}
+
+function addDiv(newDiv) {
+    document.body.append(newDiv); 
+}
+
+function createDiv(elem, type) {
+    let div = document.createElement('div');
+    div.className = type;
+    div.innerHTML = elem[type];
+    addDiv(div)
+}
 
 function renderElement(elem, type) {
     if (elem[type] != undefined) {
-        let div = document.createElement('div');
-        div.className = type;
-        div.innerHTML = elem[type];
-        document.body.append(div); 
+        createDiv(elem, type)
     }
 }
+
 async function fetchURL(){
    
     try {
@@ -19,25 +33,26 @@ async function fetchURL(){
         
         renderElement(elem,'category');
         renderElement(elem,'title');
+
         if (elem.image != undefined) {
-            let div = document.createElement('div');
-            div.className = "image";
+            const newDiv = createDivAndClass('image')
             const divURL = elem.image;
-            div.innerHTML =`"<img src=${divURL}>"`;
-            document.body.append(div);
+            newDiv.innerHTML =`"<img src=${divURL}>"`;
+            addDiv(newDiv)
         }
+
         renderElement(elem,'description');
+
         if (elem.rating != undefined) {
-            let div = document.createElement('div');
-            div.className = "rating";
+            const newDiv = createDivAndClass('rating')
              let Ratingstr =JSON.stringify(elem.rating)
-             var x = '{';
-             var y = '}';
-            var rExp = new RegExp(x, "g");
-            var rExpy = new RegExp(y, "g");
+             let x = '{';
+             let y = '}';
+             let rExp = new RegExp(x, "g");
+             let rExpy = new RegExp(y, "g");
             Ratingstr = Ratingstr.replace(rExp, '');
-            div.innerHTML= Ratingstr.replace(rExpy, '');
-            document.body.append(div);
+            newDiv.innerHTML= Ratingstr.replace(rExpy, '');
+            addDiv(newDiv)
         }
         })
     }
