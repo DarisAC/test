@@ -1,6 +1,14 @@
 
 const url ="https://fakestoreapi.com/products";
 
+function renderElement(elem, type) {
+    if (elem[type] != undefined) {
+        let div = document.createElement('div');
+        div.className = type;
+        div.innerHTML = elem[type];
+        document.body.append(div); 
+    }
+}
 async function fetchURL(){
    
     try {
@@ -8,16 +16,9 @@ async function fetchURL(){
         const data = await response.json()
         data.forEach(function (elem, index, data){
         console.log(elem);
-        function renderElement(type) {
-            if (elem[type] != undefined) {
-                let div = document.createElement('div');
-                div.className = type;
-                div.innerHTML = elem[type];
-                document.body.append(div);
-            }
-        }
-        renderElement('category');
-        renderElement('title');
+        
+        renderElement(elem,'category');
+        renderElement(elem,'title');
         if (elem.image != undefined) {
             let div = document.createElement('div');
             div.className = "image";
@@ -25,7 +26,7 @@ async function fetchURL(){
             div.innerHTML =`"<img src=${divURL}>"`;
             document.body.append(div);
         }
-        renderElement('description');
+        renderElement(elem,'description');
         if (elem.rating != undefined) {
             let div = document.createElement('div');
             div.className = "rating";
