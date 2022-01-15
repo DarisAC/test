@@ -11,10 +11,9 @@ function addDiv(newDiv) {
 }
 
 function createDiv(elem, type) {
-    let div = document.createElement('div');
-    div.className = type;
-    div.innerHTML = elem[type];
-    addDiv(div)
+    const newDiv = createDivAndClass(type)
+    newDiv.innerHTML = elem[type];
+    addDiv(newDiv)
 }
 
 function renderElement(elem, type) {
